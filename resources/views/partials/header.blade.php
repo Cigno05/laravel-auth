@@ -24,6 +24,9 @@
                         <li>
                         <a class="nav-link" href="{{url('/projects') }}">{{ __('Projects') }}</a>
                         </li>
+                        <li>
+                        <a class="nav-link" href="{{ url('/projects/create') }}">{{ __('New Project') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
