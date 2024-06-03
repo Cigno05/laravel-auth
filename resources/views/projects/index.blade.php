@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title')
-Home
+Index
 @endsection
 
 @section('content')
 
 
 <div class="container">
-    <h1>home page</h1>
+    <h1>index</h1>
 </div>
 
 
