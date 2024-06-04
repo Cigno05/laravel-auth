@@ -17,6 +17,27 @@ show
                     <p class="card-text">Created: {{ $project->creation_date }}</p>
                     <p><a href="{{ $project->link }}" class="card-link">Link to my Github</a></p>
                     <p><a href="{{ $project->link }}/{{ $project->slug }}" class="card-link">Link to repository on Github</a></p>
+                    <div class="d-flex gap-2">
+                        @auth
+                        <button href="{{ route('projects.edit', $project) }}" class="btn btn-primary">Edit</></button>
+                        <form class="form-delete" action="{{ route('projects.destroy', $project) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="btn btn-danger">Delete</button>
+
+                                    <div class="modal">
+                                        <div class="modal-container">
+                                            <h5 class="text-center me-5">Delete this project?</h5>
+                                            <button class="btn btn-danger modal-run mx-5">Yes, Delete</button>
+                                            <button class="btn btn-success modal-stop">No, Comeback</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                        @endif
+                    </div>
+                    
                 </div>
             </div>
         </div>

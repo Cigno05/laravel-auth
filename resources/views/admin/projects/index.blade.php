@@ -17,8 +17,10 @@ Index
                     <p><a href="{{ $project->link }}" class="card-link">Link to my Github</a></p>
                     <p><a href="{{ $project->link }}/{{ $project->slug }}" class="card-link">Link to repository on Github</a></p>
                     <p><a href="{{ route('projects.show', $project) }}" class="card-link">Specs</a></p>
-                    <p><a href="{{ route('projects.edit', $project) }}" class="card-link">Edit</a></p>
 
+                    @auth
+                    <p><a href="{{ route('projects.edit', $project) }}" class="card-link">Edit</a></p>
+                    @endif
                 </div>
             </div>
 

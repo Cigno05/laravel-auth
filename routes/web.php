@@ -19,7 +19,15 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::resource('projects', ProjectController::class);
+Route::middleware('auth')
+->group(function(){
+    
+    
+    Route::resource('projects', ProjectController::class);
+});
+
+Route::resource('projects', ProjectController::class)->only('index', 'show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
