@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,7 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
 
-        return view('projects.index', compact('projects'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -23,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        return view('admin.projects.create');
     }
 
     /**
@@ -31,7 +32,26 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'=> 'required|max:200',
+            'creation_date'=> 'required|date',
+            'description'=> 'nullable',
+        ]);
+
+        $form_data = $request->all();
+
+        $new_project = new Project();
+
+        $new_project->title = $form_data['title'];
+        $new_project->slug = Str::slug($new_project->title);
+        $new_project->link = 'https://github.com/Cigno05/'.(Str::slug($new_project->title));
+        $new_project->creation_date = $form_data['creation_date'];
+        $new_project->description = $form_data['description'];
+
+        $new_project->save();
+
+        return to_route("projects.index");
+
     }
 
     /**
@@ -39,7 +59,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -47,7 +67,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view("admin.projects.edit", compact("project"));
     }
 
     /**
@@ -55,7 +75,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'title'=> 'required|max:200',
+            'creation_date'=> 'required|date',
+            'description'=> 'nullable',
+        ]);
+
+        $form_data = $request->all();
+
+        // $project->fill($form_data);
+        // $project->slug = Str::slug($project->title);
+
+        $project->title = $form_data['title'];
+        $project->slug = Str::slug($project->title);
+        $project->link = 'https://github.com/Cigno05';
+        $project->creation_date = $form_data['creation_date'];
+        $project->description = $form_data['description'];
+
+        $project->save();
+
+        return to_route("projects.show", $project);
     }
 
     /**

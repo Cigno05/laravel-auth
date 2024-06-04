@@ -9,10 +9,10 @@ create
 @section('content')
 <maih>
     <section>
-        <div class="container">
+        <div class="container w-50 mt-5">
             <h1>Add a new project!</h1>
 
-            <form action="" method="POST">
+            <form action="{{ route('projects.store') }}" method="POST">
 
                 @csrf
                 <div class="mb-3">
@@ -21,12 +21,9 @@ create
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea type="text" class="form-control" id="description" name="description" placeholder="Project description"></textarea>
+                    <textarea type="text" row="10" class="form-control" id="description" name="description" placeholder="Project description"></textarea>
                 </div>
-                <div class="mb-3">
-                    <label for="slug" class="form-label">Link Github</label>
-                    <input type="text" class="form-control" id="slug" name="slug" value="https://github.com/Cigno05/">
-                </div>
+                
                 <div class="mb-3">
                     <label for="creation_date" class="form-label">Creation Date</label>
                     <input type="date" class="form-control" id="creation_date" name="creation_date">
@@ -34,10 +31,18 @@ create
                 
 
 
-                <button type="submit" class="btn btn-primary">Aggiungi</button>
+                <button type="submit" class="btn btn-primary">Create</button>
             </form>
-
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </section>
 </maih>
 

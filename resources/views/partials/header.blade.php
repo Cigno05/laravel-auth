@@ -19,13 +19,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{route('home')}}">{{ __('Home') }}</a>
                         </li>
                         <li>
-                        <a class="nav-link" href="{{url('/projects') }}">{{ __('Projects') }}</a>
+                        <a class="nav-link" href="{{route('projects.index')}}">{{ __('Projects') }}</a>
                         </li>
                         <li>
-                        <a class="nav-link" href="{{ url('/projects/create') }}">{{ __('New Project') }}</a>
+                        <a class="nav-link" href="{{ route('projects.create')}}">{{ __('New Project') }}</a>
                         </li>
                     </ul>
 
